@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html ng-app="hotelsTest">
+<head>
+	<title>HolidayPirates Test</title>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HolidayPirates, Hotels, Vacation, Holiday" />
+	<meta name="keywords" content="HolidayPirates, Hotels, Vacation, Holiday" />
+	<meta name="author" content="steftas" />
+	<meta name="robots" content="index, follow" />
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	<![endif]-->
+
+	<link href="assets/css/normalize.css" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+    <link href="assets/css/style.css" rel="stylesheet"> 
+
+	<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
+
+	<script src="app/app.js"></script>
+
+</head>
+<body ng-controller="testController">
+	<header>
+		<div class="hp-logo"></div>
+	</header>
+
+	<div class="container">
+		<div class="row">
+			<div class="hp-spinner_div" data-loading >
+				<div class="hp-spinner">
+					<img src="https://www.asus.com/support/images/support-loading.gif" style="width: 150px;height: 150px;"/>
+				</div>
+			</div>
+
+			<div class="col-lg-12">
+				<div class="hp-filter">
+					<div class="col-sm-4 hp-min_stars">
+						<label>Minimum hotel stars:</label>
+						<span class="fa fa-star" aria-hidden="true"></span>
+						<input type="number" min="0" max="5" ng-model="minStars">
+					</div>
+
+					<div class="col-sm-4 hp-max_price">
+						<label>Maximum hotel price:</label>
+						<span class="fa fa-eur" aria-hidden="true"></span>
+						<input type="number" min="0" ng-model="maxPrice">
+					</div>
+
+					<div class="col-sm-4 hp-sort">
+						<label>Sort by:</label>
+						<span class="fa fa-sort-amount-asc" aria-hidden="true"></span>
+						<select ng-model="orderProp">
+							<option value="name">Name</option>
+							<option value="price">Price</option>
+							<option value="stars">Stars</option>
+							<option value="rating">Rating</option>
+						</select>
+					</div><!--- end hp-sort -->
+				</div>
+			</div><!-- end col-lg-12 -->
+
+			<div class="col-lg-12 txt_center">
+				<button class="hp-load_button" ng-click="getHotels(minStars, maxPrice);">Load Hotels</button>
+			</div><!-- end col-lg-12 -->
+
+			<div class="col-lg-12">
+				<div class="row">
+					<div class="col-lg-12 mb20" ng-repeat="hotel in hotels | orderBy: orderProp  track by $index" id={{hotel.id}}>
+						<div class="hp-hotel_div" ng-class="{true: 'hp-review_active', false:''}[showReview]">
+							<div class="hp-hotel_img" style="background-image: url({{hotel.images[0]}});"></div>
+							<div class="hp-hotel_info">
+								<div class="hp-hotel_first_row">
+									<div class="hp-hotel_stars">
+										<div ng-repeat="star in [1,2,3,4,5]">
+											<div ng-switch="hotel.stars >= star">
+												<div ng-switch-when="true">
+													<i class="fa fa-star" aria-hidden="true"></i>
+												</div>
+												<div ng-switch-when="false">
+													<i class="fa fa-star-o" aria-hidden="true"></i>
+												</div>
+											</div>
+										</div>
+									</div>
+									<h2 class="hp-hotel_name">{{hotel.name}}</h2>
+								</div><!-- end hp-hotel_first_row -->
+
+								<p class="hp-hotel_location">{{hotel.city}} - {{hotel.country}}</p>
+
+								<p class="hp-hotel_description">Hotel description: {{hotel.description}}</p>
+
+								<div class="hp-hotel_last_row">
+									<div class="hp-half txt_right">
+										<div class="hp-hotel_price">{{hotel.price}} &euro;</div>
+										<div class="hp-hotel_date">{{hotel.date_start | date:"dd.MM.yyyy"}} - {{hotel.date_end | date:"dd.MM.yyyy"}}</div>
+									</div>
+									<div class="hp-half txt_center">
+										<button ng-class="{true:'hp-hotel_button', false:'hp-hotel_button_hide'}[!showReview]" class="" ng-click="showReview||getReviews(hotel.id, $index); showReview = !showReview;"></button>
+									</div>
+								</div><!-- end hp-hotel_last_row -->
+
+							</div><!-- end hp-hotel_info -->
+						</div><!-- end hp-hotel_div -->
+
+						<div class="hp-hotel_reviews" id="hotel_reviews" ng-show="showReview">
+							<div class="hp-hotel_review_row" ng-repeat="review in comments[$index]" ng-class="{'hp-hotel_review_row_last':$last}">
+								<div ng-class="{true:'hp-review_positive', false:'hp-review_negative'}[review.positive]"></div>
+								<div class="hp-review_div">
+									<p class="hp-review_name">{{review.name}}</p>
+									<p class="hp-review">{{review.comment}}</p>
+								</div><!-- end hp-review_div -->
+							</div><!-- end hp-hotel_review_row -->
+							<div class="hp-error_div" style="background: transparent;" ng-show="reviewError">
+								{{error}}
+							</div>
+						</div><!-- end hp-hotel_reviews -->
+					</div><!-- end col-lg-12 -->
+
+					<div class="col-lg-12 mb20" ng-show="hotelError">
+						<div class="hp-error_div">
+							{{error}}
+						</div>
+					</div>
+				</div><!-- end row -->				
+			</div><!-- end col-md-12 -->
+		</div><!-- end row -->
+	</div><!-- end container -->
+</body>
+</html>

@@ -1,0 +1,288 @@
+@import 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700';
+
+.mb20 {margin-bottom: 20px !important;}
+
+.txt_right {text-align: right !important;}
+.txt_center {text-align: center !important;}
+.txt_left {text-align: left !important;}
+
+.hp-half {
+	width: 50%;
+	min-height: 1px;
+	float: left;
+	position: relative;
+}
+.hp-half:first-of-type {
+	float: right;
+}
+
+body {
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	background-color: #eeeeee;
+}
+/*--------Header------------*/
+header {
+	width: 100%;
+	height: 100px;
+	position: relative;
+	background-color: #fff;
+	box-shadow: 0px 5px 15px #ccc;
+	margin-bottom: 30px;
+}
+.hp-logo {
+	width: 370px;
+	height: 70px;
+	position: relative;
+	background-image: url(../img/logo.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	-webkit-transform: translate(-50%, -50%);
+}
+
+/*--------End Header------------*/
+
+/*--------Content------------*/
+.hp-filter {
+	background-color: #fff;
+	padding: 15px;
+	border-radius: 3px;
+	overflow: auto;
+	position: relative;
+	font-size: 16px;
+    font-weight: 600;
+}
+input, select {
+	border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 30px;
+    padding-right: 5px;
+}
+select {
+	text-indent: 30px;
+	line-height: 28px;
+}
+.hp-filter span {
+	position: absolute;
+	bottom: 9px;
+	left: 22px;
+}
+
+.hp-error_div {
+	padding: 15px;
+	text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    background-color: #fff;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	overflow: auto;
+}
+.hp-hotel_div {
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	overflow: auto;
+}
+.hp-hotel_img {
+	width: 40%;
+	height: 300px;
+	background-image: url('http://lorempixel.com/640/480/city?87325');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	border-right: 1px solid #ccc;
+	float: left;
+}
+.hp-hotel_info {
+	width: 60%;
+	height: 300px;
+	float: left;
+	padding: 10px;
+}
+.hp-hotel_first_row, .hp-hotel_last_row {
+	width: 100%;
+	overflow: hidden;
+}
+.hp-hotel_name {
+	float: left;
+	margin: 0;
+	font-weight: 800;
+}
+.hp-hotel_stars {
+	float: right;
+	line-height: 2;
+}
+.hp-hotel_stars > div {
+	float: left;
+}
+.hp-hotel_location {
+	margin: 5px 0 0;
+	font-weight: 600;
+}
+.hp-hotel_description {
+	margin: 25px 0;
+    min-height: 100px;
+    overflow: hidden;
+    line-height: 1;
+}
+
+.hp-hotel_button, .hp-load_button {
+	padding: 15px;
+	margin: 9px 0;
+	background-color: #824271;
+	color: #fff;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+}
+.hp-hotel_button::before {
+	content: "Show reviews";
+}
+.hp-hotel_button_hide {
+	padding: 15px;
+	margin: 9px 0;
+	background-color: #824271;
+	color: #fff;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+}
+.hp-hotel_button_hide::before {
+	content: "Hide reviews";
+}
+.hp-hotel_price {
+	font-size: 35px;
+}
+.hp-review_active {
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+.hp-hotel_reviews {
+	background-color: rgba(130, 66, 113, 0.2);
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	border-top: 0;
+	border-top-right-radius: 0;
+	border-top-left-radius: 0;
+	padding: 15px;
+	overflow: auto;
+}
+.hp-hotel_review_row {
+	border-bottom: 1px solid rgba(51, 51, 51, 0.2);
+	margin-bottom: 10px;
+	position: relative;
+}
+.hp-hotel_review_row_last {
+	border-bottom: 0;
+}
+.hp-review_positive::before {
+	content: "+";
+}
+.hp-review_negative::before {
+	content: "-";
+}
+.hp-review_positive, 
+.hp-review_negative {
+	position: absolute;
+	width: 50px;
+	height: 50px;
+	border-radius: 25px;
+	background-color: #eaeaea;
+	font-size: 26px;
+	font-weight: 600;
+	line-height: 50px;
+	text-align: center;
+	top: 50%;
+	transform: translateY(-50%);
+	-webkit-transform: translateY(-50%);
+}
+.hp-review_div {
+	width: 100%;
+	padding-left: 70px;
+}
+.hp-review_name {
+	font-weight: 800;
+	font-size: 22px;
+}
+/*--------End Content------------*/
+
+/*-----------SPINER--------------*/
+.hp-spinner_div {
+	width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.7);
+    z-index: 10;
+}
+.hp-spinner {
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%, -50%);
+}
+
+/*---------END SPINER-----------------------*/
+
+
+/*----------RESPONSIVE----------------------*/
+@media screen and  (max-width: 767px) {
+	.hp-hotel_img {width: 100%;}
+	.hp-hotel_info {
+		width: 100%;
+		height: auto;
+	}
+	.hp-hotel_stars {
+		float: left;
+		width: 100%;
+	}
+	.hp-half {
+		width: 100%;
+	}
+	.hp-half:first-of-type {
+		float: left;
+	}
+	.hp-logo {
+		width: 280px;
+		height: 55px;
+	}
+}
+@media screen and (min-width: 768px) and (max-width: 991px) {
+	.hp-hotel_img {width: 30%;}
+	.hp-hotel_info {width: 70%;}
+}
+
+/* ------------  IE--------------------*/
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    select {
+        padding-left:30px !important;
+        padding-right: 0 !important;
+        padding-top:4px !important;
+        padding-bottom: 4px !important;
+    }
+}
+
+/*-----------------MOZZILA ----------------*/
+@-moz-document url-prefix() {
+    select {
+        text-indent: 0;
+    }
+}
+
+/*-----------------CHROME------------------*/
+@media screen and (-webkit-min-device-pixel-ratio:0) and (min-resolution:.001dpcm) {
+    select {
+        text-indent: 0;
+    }
+}
